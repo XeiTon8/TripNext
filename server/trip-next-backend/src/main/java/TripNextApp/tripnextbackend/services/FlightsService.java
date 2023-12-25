@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 @Service
 public class FlightsService {
     private final String apiURL = "https://tripadvisor16.p.rapidapi.com/api/v1/flights/searchFlights";
-    private final String apiKey = "8e7e350087msh2dbac10ad1eb648p103c67jsn45b1f36b8a72";
+    private final String apiKey = "";
     private static final Logger logger = LoggerFactory.getLogger(FlightsService.class);
 
     public CompletableFuture <String> getAllFlights(FlightsParams params) {
