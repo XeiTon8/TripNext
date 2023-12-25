@@ -1,4 +1,5 @@
 # 📜 TripNext
+![TripNext-gif](https://github.com/XeiTon8/TripNext/blob/main/TripNext-Gif.gif)
 A simple application that allows user to search for flight tickets. 
 
 **Details about app logic**:
