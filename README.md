@@ -107,7 +107,7 @@ Code snippet with logic and commentaries:
 2. Improve my Angular skills. 
 
 **What have I learned**:
-- How to work with complex data that might come from backend, and how to extract data by using nested loops - code can be found in Java service for flights.
+- How to work with complex data that might come from backend, and how to extract data by using nested loops - code can be found in <a href="https://github.com/XeiTon8/TripNext/blob/main/server/trip-next-backend/src/main/java/TripNextApp/tripnextbackend/services/FlightsService.java">Java service for flights</a>.
 
 - How to make different parts of the application to work together (e.g. choosing a departure and destination, defining flight stops and then rendering the final result).
 
