@@ -1,0 +1,233 @@
+.flights-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 2%;
+}
+
+.flights-form__content-container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    gap: 15px;
+
+    & .airport-content-wrapper,  .flights-form__date-wrapper {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    & input:not([type="radio"]) {
+        padding: 10px;
+        box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+        outline: none;
+        border-radius: 10px;
+        border: none;
+    }
+}
+
+.form__flight-type-wrapper {
+    display: flex;
+    margin-right: auto;
+    padding-left: 5%;
+    gap: 5px;
+}
+
+
+.form__search-flights-btn {
+    padding: 15px;
+    background-color: lightblue;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 300px;
+    border-radius: 15px;
+    border: none;
+    box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+    margin-left: auto;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    transform: translateY(20%);
+
+    &:hover {
+        background-color: black;
+        transition: all 0.3s ease-in-out;
+    }
+
+    &:active {
+        transform: scale(0.5);
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.additional-info__wrapper {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.additional-info {
+    border-radius: 10px;
+    flex: 1 0 auto;
+    box-shadow: 0px 0px 4px 4px rgba(0, 0, 0, .04);
+    padding: 10px;
+
+    & .additional-info__content {
+        display: flex;
+        gap: 10px;
+    }
+
+    & .additional-info__service-class {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mainForm__airport-suggestions {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 400px;
+    position: absolute;
+    top: 30%;
+}
+
+.arrival-suggestions {
+    left: 22.5%;
+}
+
+.additional-info-numbers-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &  .minus-button, .plus-button {
+        font-size: 20px;
+        font-family: monospace;
+        font-weight: bold;
+    }
+}
+
+
+.flight-card {
+    display: flex;
+    padding: 20px;
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 2%;
+
+    & .flight-card__companies-logos {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 10px;
+    }
+
+    & .flight-card__flight-info {
+        display: flex;
+        flex-direction: column;
+        min-height: 50%;
+        max-height: 50%;
+        flex: 1 0 auto;
+        justify-content: space-around;
+
+        & .departure-info, .arrival-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            & .departure-info__time, .departure-info__airports, .arrival-info__time, .arirval-info__airports {
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    .flight-card__flight-ticket {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    & .flight-card__check-offers-btn {
+        padding: 15px;
+        background-color: lightblue;
+        color: #fff;
+        font-size: 18px;
+        font-weight: bold;
+        max-width: 300px;
+        border-radius: 15px;
+        border: none;
+        box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+    &:hover {
+        background-color: black;
+        transition: all 0.3s ease-in-out;
+    }
+    
+    &:active {
+        transform: scale(0.5);
+        transition: all 0.3s ease-in-out;
+    }
+    }
+}
+
+.info__deco {
+    width: 20px;
+    height: 1px;
+    background: lightgray;
+}
+
+.departure-info__airports {
+    display: flex;
+    gap: 15px;
+}
+
+.placeholder-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    & .placeholder-item {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 10px;
+        height: 200px;
+        padding: 20px;
+    }
+}
+
+
+.additional-info-done-button {
+    background-color: lightblue;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    max-width: 200px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    text-align: center;
+    box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+}
+
+
+@keyframes loading {
+    0% {
+    background-position: 200% 0;
+    }
+    100% {
+    background-position: -200% 0;
+    }
+}

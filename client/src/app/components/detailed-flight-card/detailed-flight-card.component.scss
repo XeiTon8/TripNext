@@ -1,0 +1,156 @@
+.detailed-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    width: 85%;
+    margin: 0 auto;
+    height: 100%;
+    position: fixed;
+    top: 0%;
+    left: 5%;
+    overflow: auto;
+    z-index: 100;
+    background: #fff;
+    box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+
+    .detailed-card__ticket-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 0px 20px;
+    
+    }
+    
+    .detailed-card__destinations {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+
+        .destinations-deco {
+            width: 20px;
+            height: 1px;
+            background-color: gray;
+        }
+    }
+
+    & .big-deco {
+        width: 30px;
+        height: 2px;
+        background-color: gray;
+    }
+
+    & .detailed-card__separator {
+        height: 30px;
+        width: 2px;
+        background-color: gray;
+    }
+}
+
+.flight-card__destinations-info {
+
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 15px;
+
+
+    & .flight-destinations__destination-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px;
+
+        & div:not(.destinations-deco) {
+            display: flex;
+            gap: 10px;
+        }
+    }
+
+    & .flight-destinations {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+}
+
+
+.detailed-card__content-info {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+
+
+    & .detailed-card__tickets-info {
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 15px;
+        background: #fff;
+        box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+        padding: 10px;
+        flex: 0.2 1 auto;
+    
+        & .detailed-card__ticket {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-direction: column;
+            
+
+            & .detailed-card__ticket-card {
+                padding: 15px;
+                box-shadow:  0px 0px 4px 4px rgba(0, 0, 0, .04);
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+        }
+        
+    }
+
+    & .detailed-card__tickets-title {
+        font-weight: bold;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+}
+
+.flight-destinations__departure {
+    background-color: rgba($color: lightgreen, $alpha: 0.5);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+
+.flight-destinations__arrival {
+    background-color: rgba(255, 217, 26, 0.562);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.prices-deco {
+    width: 20px;
+    height: 1px;
+    background-color: gray;
+}
+
+.close-detailed-card {
+    background-color: inherit;
+    font-weight: bold;
+    font-size: 1.5rem;
+    border: none;
+    margin-left: auto;
+}
+
+.flight-type-title {
+    font-weight: bold;
+    size: 16px;
+}
+
+.destination__company-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

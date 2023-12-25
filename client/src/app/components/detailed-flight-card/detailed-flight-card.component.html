@@ -1,0 +1,84 @@
+<div class="detailed-card">
+    <div class="detailed-card__ticket-info">
+        <span>{{flightTicketInfo.departureAirport}},</span>
+        <span>{{flightTicketInfo.departureTime}}</span>
+        <div class="big-deco"></div>
+    
+        <span>{{flightTicketInfo.arrivalAirport}},</span>
+        <span>{{flightTicketInfo.arrivalTime}}</span>
+        <div class="detailed-card__separator"></div>
+    
+        <span *ngIf="flightTicketInfo.ticketType == 'ROUND_TRIP' else oneWay">Return</span>
+        <ng-template #oneWay>
+            <span>One way</span>
+        </ng-template>
+        <span>{{flightTicketInfo.flightServiceClass}}</span>
+        
+        <span *ngIf="flightTicketInfo.passengers!.length == 1 else manyPassengers">1 traveler</span>
+        <ng-template #manyPassengers>
+            <span>{{flightTicketInfo.passengers!.length}} travelers</span>
+        </ng-template>
+        <button class="close-detailed-card" (click)="closeCard()">X</button>
+        
+    </div>
+    
+<div class="detailed-card__content-info">
+
+    <div class="flight-card__destinations-info" >
+        <div class="detailed-card__destinations flight-destinations">
+            <span class="flight-type-title">Departure</span>
+            <div class="flight-destinations__departure" *ngFor="let departureSegmentFlight of flightObject.departure">
+                <div class="flight-destinations__destination-wrapper" >
+                    <div class="destination__company-wrapper">
+                        <img src="{{departureSegmentFlight.logoUrl}}" alt="">
+                        <span>{{departureSegmentFlight.displayName}}</span>
+                    </div>
+
+                    <div class="">
+                        <span>{{departureSegmentFlight.departureDateTime | date: "MMM d, h:mm a"}},</span>
+                        <span>{{departureSegmentFlight.originStationCode}}</span>
+                    </div>
+                    <div class="destinations-deco"></div>
+                    <div class="">
+                        <span>{{departureSegmentFlight.arrivalDateTime | date: "MMM d, h:mm a"}},</span>
+                        <span>{{departureSegmentFlight.destinationStationCode}}</span>
+                    </div>
+                </div> 
+            </div>
+            <span class="flight-type-title">Return</span>
+            <div class="flight-destinations__arrival" *ngFor="let returnSegmentFlight of flightObject.return">
+                <div class="flight-destinations__destination-wrapper" >
+                    <div class="destination__company-wrapper">
+                        <img src="{{returnSegmentFlight.logoUrl}}" alt="">
+                        <span>{{returnSegmentFlight.displayName}}</span>
+                    </div>
+                    <div class="">
+                        <span>{{returnSegmentFlight.departureDateTime | date: "MMM d, h:mm a"}},</span>
+                        <span>{{returnSegmentFlight.originStationCode}}</span>
+                    </div>
+                    <div class="destinations-deco"></div>
+                    <div class="">
+                        <span>{{returnSegmentFlight.arrivalDateTime | date: "MMM d, h:mm a"}},</span>
+                        <span>{{returnSegmentFlight.destinationStationCode}}</span>
+                    </div>
+                </div> 
+            </div>
+        </div> 
+    </div>
+
+    <div class="detailed-card__tickets-info">
+        <span class="detailed-card__tickets-title">Tickets</span>
+        <div class="detailed-card__ticket">
+            <div *ngFor="let flightPurchaseLink of flightObject.purchaseLinks">
+                <div class="detailed-card__ticket-card">
+                    <img src="{{flightPurchaseLink.logoUrl}}">
+                    <span>{{flightPurchaseLink.currency}} {{flightPurchaseLink.totalPrice}}</span>
+                    <div class="prices-deco"></div>
+                    <a [href]="flightPurchaseLink.url">Buy</a>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+</div>
+</div>

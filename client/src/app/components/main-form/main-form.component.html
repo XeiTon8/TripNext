@@ -1,0 +1,201 @@
+<div class="main-form__container">
+  <form class="flights-form" [formGroup]="mainFormGroup">
+    <div class="form__flight-type-wrapper">
+      <span>Return</span>
+        <label>
+          <input type="radio" name="" id="form__set-returnFlight" (change)="mainFormState.setReturnTrip($event)" [checked]="mainPageStatus.isOneTrip === false">
+        </label>
+      <span>One way</span>
+      <label for="form__set-oneTrip">
+        <input type="radio" name="" id="form__set-OneTrip" (change)="mainFormState.setOneTrip($event)" [checked]="mainPageStatus.isOneTrip === true">
+      </label>
+    </div>
+  
+  <div class="flights-form__content-container">
+    <div class="airport-content-wrapper" formGroupName="departureAirport">
+      <span>From</span>
+        <label for="form__departure-airport">
+          <input type="text" id="form__departure-airport" (input)="setDepartureAirport($event)" formControlName="departureAirportShortName" name="departureAirport.departureAirportShortName" >
+        </label>
+    </div>
+    
+    <div class="airport-content-wrapper" formGroupName="arrivalAirport">
+      <span>To</span>
+      <label for="form__arrival-airport">
+        <input type="text" id="form__arrival-airport" (input)="setArrivalAirport($event)" formControlName="arrivalAirportShortName" name="arrivalAirport.arrivalAirportShortName">
+      </label>
+    </div>
+  
+    <div class="flights-form__date-wrapper">
+      <span>Depart</span>
+      <label for="">
+        <input type="date" name="" id="" (change)="setDepartureDate($event)" formControlName="departureDate">
+      </label>
+    </div>
+  
+    <div [ngClass]="{'flights-form__date-wrapper': true, 'flights-form__return-date--active': !mainPageStatus.isOneTrip, 'flights-form__return-date--hidden': mainPageStatus.isOneTrip}" >
+      <span>Return</span>
+      <label for="">
+        <input type="date" name="" id="" (change)="setArrivalDate($event)" formControlName="arrivalDate" [disabled]="mainPageStatus.isOneTrip" [readOnly]="mainPageStatus.isOneTrip">
+      </label>
+    </div>
+  
+    <div class="additional-info__wrapper">
+      <span>Num of passengers & service class</span>
+      <div class="flights-form__additional-info additional-info">
+        <div class="additional-info__content" (click)="mainFormState.openAdditionalContent()">
+          <span>{{numOfPassengers.numOfAdults()}}</span>
+          <ng-container  *ngIf="numOfPassengers.numOfSeniors() > 0">
+            <span>{{numOfPassengers.numOfSeniors()}}</span>
+          </ng-container>
+          <ng-container *ngIf="numOfPassengers.numOfChildren()">
+            <span>{{numOfPassengers.numOfChildren()}}</span>
+          </ng-container>
+          <span>{{mainFormGroup.get("flightServiceClass")!.value}}</span>
+        </div>
+    
+        <div class="additional-info__dropdown-content" *ngIf="mainPageStatus.isAdditionalContent">
+          <div class="additional-info__service-class">
+              <span>Service class</span>
+              <select formControlName="flightServiceClass" >
+                <option *ngFor="let state of formFlightServiceClass | keyvalue" [value]="state.value">
+                  {{state.value}}
+                </option>
+              </select>
+          </div>
+      
+          <div class="additional-info__numbers">
+              <span>Adults</span>
+              <div class="additional-info-numbers-wrapper">
+                <span class="minus-button" (click)="mainFormState.passengersState.removeAdult()">-</span>
+                <span>{{numOfPassengers.numOfAdults()}}</span>
+                <span class="plus-button" (click)="mainFormState.passengersState.addAdult()">+</span>
+              </div>
+        
+              <span>Seniors</span>
+              <div class="additional-info-numbers-wrapper">
+                <span class="minus-button" (click)="mainFormState.passengersState.removeSenior()">-</span>
+                <span>{{numOfPassengers.numOfSeniors()}}</span>
+                <span class="plus-button" (click)="mainFormState.passengersState.addSenior()">+</span>
+              </div>
+        
+              <span>Children</span>
+              <div class="additional-info-numbers-wrapper">
+                <span class="minus-button" (click)="mainFormState.passengersState.removeChildren()">-</span>
+                <span>{{numOfPassengers.numOfChildren()}}</span>
+                <span class="plus-button" (click)="mainFormState.passengersState.addChildren()">+</span>
+              </div>
+              
+          </div>
+
+          <button class="additional-info-done-button" (click)="mainFormState.closeAdditionalContent()" >Done</button>
+        </div>
+      </div>
+    </div>
+  
+    <div class="form-search-btn-wrapper">
+      <button class="form__search-flights-btn" (click)="searchFlights()">Search flights</button>
+    </div>
+
+  </div>
+  </form>
+
+  <div class="" *ngIf="mainPageStatus.isFlightsLoading">
+    <div class="placeholder-wrapper">
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+      <div class="placeholder-item"></div>
+    </div>
+  </div>
+  
+  <div class="" *ngIf="isLoadingDone">
+    <div class="flight-object-wrapper" *ngFor="let flightObject of flightsToRender.flights; let i = index">
+      <div class="flight-segment-wrapper">
+        <div class="flight-card">
+          <div class="flight-card__companies-logos">
+            <div class="flight-card__company-logo">
+              <img src="{{flightObject.flightDataObject.departure[0].logoUrl}}" alt="">
+              <span>{{flightObject.flightDataObject.departure[0].displayName}}</span>
+            </div>
+            <div class="flight-card__company-logo">
+              <img src="{{flightObject.flightDataObject.return[flightObject.flightDataObject.return.length - 1].logoUrl}}" alt="">
+              <span>{{flightObject.flightDataObject.return[flightObject.flightDataObject.return.length - 1].displayName}}</span>
+            </div>
+          </div>
+
+          <div class="flight-card__flight-info">
+            <div class="flight-card__departure-info departure-info">
+              <div class="departure-info__time">
+                <span>{{flightObject.flightDataObject.departure[0].departureDateTime| date: 'medium'}}</span>
+                <div class="info__deco"></div>
+                <span>{{flightObject.flightDataObject.departure[0].arrivalDateTime | date: 'medium'}}</span>
+              </div>
+              <div class="departure-info__airports">
+                <div class="departure-info__airport">
+                  <span>{{flightObject.flightDataObject.departure[0].originStationCode}}</span>
+                </div>
+                <div class="info__deco"></div>
+                <div class="departure-info__airport">
+                  <span>
+                    {{flightObject.flightDataObject.departure[0].destinationStationCode}}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="flight-card__arrival-info arrival-info">
+              <div class="arrival-info__time">
+                <span>{{flightObject.flightDataObject.return[flightObject.flightDataObject.return.length - 1].departureDateTime | date: 'medium'}}</span>
+                <div class="info__deco"></div>
+                <span>{{flightObject.flightDataObject.return[flightObject.flightDataObject.return.length - 1].arrivalDateTime | date: 'medium'}}</span>
+              </div>
+              <div class="arirval-info__airports">
+                <span>{{flightObject.flightDataObject.return[flightObject.flightDataObject.return.length - 1].originStationCode}}</span>
+                <div class="info__deco"></div>
+                <span>{{flightObject.flightDataObject.return[flightObject.flightDataObject.return.length - 1].destinationStationCode}}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flight-card__flight-ticket" >
+            <div class=""  *ngIf="flightStops.length > 0 && flightStops[i].length > 0">
+                <span >Flight with stops</span>
+                <div class="" *ngFor="let flightArray of flightStops[i]; let j = index">
+                  <div class="" >
+                    <span>{{flightArray}}</span>
+                  </div>
+                </div>
+              </div>
+            <span>{{flightObject.flightDataObject.purchaseLinks.length}} tickets</span>
+            <span>From {{flightObject.flightDataObject.purchaseLinks[0].currency}} {{getMinPrice(flightObject.flightDataObject)}}</span>
+            <button class="flight-card__check-offers-btn" (click)="mainFormState.setSelectedFlight(flightObject.flightDataObject)">Check offers</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class="mainForm__airport-suggestions" *ngIf="mainPageStatus.isDepartureAirportPopup && mainFormGroup.get('departureAirport.departureAirportName')?.value!.length >= 3 && airportSuggestions.length > 0">
+  <div class="" *ngFor="let airport of airportSuggestions" (click)="setSuggestedAirport(airport.name)">
+    {{airport.name}}
+  </div>
+</div>
+
+<div class="mainForm__airport-suggestions arrival-suggestions" *ngIf="mainPageStatus.isArrivalAirportPopup && mainFormGroup.get('arrivalAirport.arrivalAirportName')?.value!.length >= 3 && airportSuggestions.length > 0">
+  <div class="" *ngFor="let airport of airportSuggestions" (click)="setSuggestedAirport(airport.name)">
+    {{airport.name}}
+  </div>
+</div>
+
+<div class="" *ngIf="mainPageStatus.isDetailedFlightCard">
+  <app-detailed-flight-card 
+  [flightObject]="selectedFlightData" 
+  [flightTicketInfo]="flightTicketInfo"
+  (isOpenedCard)="mainFormState.closeFlightCard($event)"></app-detailed-flight-card>
+</div>
